@@ -43,6 +43,7 @@ module Middleman
           if uri.relative? && uri.host.nil? && !(asset_path =~ /^[^\/].*[a-z]+\.[a-z]+\/.*/)
             dest_path = ::Middleman::Util.url_for(app, asset_path, relative: false, current_resource: current_resource)
 
+            # TODO what if the first path directory is named as the http_prefix?
             resource = app.sitemap.find_resource_by_destination_path(dest_path.gsub(app.config[:http_prefix], ''))
 
             if resource && (result = yield(asset_path))
